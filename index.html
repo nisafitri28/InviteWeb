@@ -1,0 +1,1237 @@
+<<<<<<< HEAD
+
+=======
+>>>>>>> ee3eba378ce08904960c5c34e591c9ab32421710
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+<<<<<<< HEAD
+    <title>InviteWeb Pro - Premium Digital Invitations</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&family=Playfair+Display:wght@400;600;700&family=Alex+Brush&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        body {
+            font-family: 'Poppins', sans-serif;
+        }
+        .font-serif {
+            font-family: 'Playfair Display', serif;
+        }
+        .font-script {
+            font-family: 'Alex Brush', cursive;
+        }
+        .bg-cream {
+            background-color: #FFF8E7;
+        }
+        .text-gold {
+            color: #D4AF37;
+        }
+        .bg-gold {
+            background-color: #D4AF37;
+        }
+        .border-gold {
+            border-color: #D4AF37;
+        }
+        .invitation-shadow {
+            box-shadow: 0 10px 50px rgba(0,0,0,0.1);
+        }
+        @keyframes fade-up {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        .animate-fade-up {
+            animation: fade-up 1s ease-out forwards;
+        }
+    </style>
+<script type="importmap">
+{
+  "imports": {
+    "react/": "https://esm.sh/react@^19.2.3/",
+    "react": "https://esm.sh/react@^19.2.3",
+    "react-dom/": "https://esm.sh/react-dom@^19.2.3/",
+    "@google/genai": "https://esm.sh/@google/genai@^1.34.0"
+  }
+}
+</script>
+<link rel="stylesheet" href="/index.css">
+</head>
+<body class="bg-cream text-slate-800">
+    <div id="root"></div>
+<script type="module" src="/index.tsx"></script>
+</body>
+</html>
+=======
+    <title>Matchfit ID - AI Fashion Assistant</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        :root {
+            --primary-gold: #D4AF37;
+            --secondary-gold: #F4E4C1;
+            --primary-black: #1a1a1a;
+            --secondary-black: #2d2d2d;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, var(--primary-black) 0%, var(--secondary-black) 100%);
+            color: white;
+            min-height: 100vh;
+        }
+
+        /* Loading Screen */
+        #loadingScreen {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: var(--primary-black);
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            z-index: 9999;
+        }
+
+        .loader {
+            width: 60px;
+            height: 60px;
+            border: 5px solid var(--secondary-black);
+            border-top: 5px solid var(--primary-gold);
+            border-radius: 50%;
+            animation: spin 1s linear infinite;
+        }
+
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+
+        /* Navbar */
+        .navbar-custom {
+            background: rgba(26, 26, 26, 0.95);
+            backdrop-filter: blur(10px);
+            box-shadow: 0 2px 20px rgba(212, 175, 55, 0.2);
+        }
+
+        .navbar-brand {
+            font-weight: bold;
+            font-size: 1.5rem;
+            color: var(--primary-gold) !important;
+        }
+
+        .nav-link {
+            color: white !important;
+            transition: color 0.3s;
+        }
+
+        .nav-link:hover {
+            color: var(--primary-gold) !important;
+        }
+
+        .btn-gold {
+            background: linear-gradient(135deg, var(--primary-gold), #FFD700);
+            border: none;
+            color: var(--primary-black);
+            font-weight: bold;
+            padding: 10px 30px;
+            border-radius: 25px;
+            transition: transform 0.3s, box-shadow 0.3s;
+        }
+
+        .btn-gold:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 20px rgba(212, 175, 55, 0.4);
+            color: var(--primary-black);
+        }
+
+        .btn-gold:active {
+            transform: scale(0.95);
+        }
+
+        /* Hero Section */
+        .hero-section {
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            padding: 100px 0;
+            background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 600"><defs><linearGradient id="grad" x1="0%" y1="0%" x2="100%" y2="100%"><stop offset="0%" style="stop-color:rgb(212,175,55);stop-opacity:0.1" /><stop offset="100%" style="stop-color:rgb(255,215,0);stop-opacity:0.05" /></linearGradient></defs><rect width="1200" height="600" fill="url(%23grad)"/></svg>');
+        }
+
+        .hero-title {
+            font-size: 4rem;
+            font-weight: bold;
+            background: linear-gradient(135deg, var(--primary-gold), #FFD700);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            margin-bottom: 20px;
+        }
+
+        /* Feature Cards */
+        .feature-card {
+            background: rgba(45, 45, 45, 0.6);
+            border: 2px solid var(--primary-gold);
+            border-radius: 20px;
+            padding: 30px;
+            margin: 20px 0;
+            transition: transform 0.3s, box-shadow 0.3s;
+            cursor: pointer;
+        }
+
+        .feature-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 10px 30px rgba(212, 175, 55, 0.3);
+        }
+
+        .feature-icon {
+            width: 80px;
+            height: 80px;
+            background: linear-gradient(135deg, var(--primary-gold), #FFD700);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 20px;
+            font-size: 2rem;
+            color: var(--primary-black);
+        }
+
+        /* Forms */
+        .form-control {
+            background: rgba(45, 45, 45, 0.8);
+            border: 1px solid var(--primary-gold);
+            color: white;
+            border-radius: 10px;
+            padding: 12px;
+        }
+
+        .form-control:focus {
+            background: rgba(45, 45, 45, 0.9);
+            border-color: var(--primary-gold);
+            color: white;
+            box-shadow: 0 0 10px rgba(212, 175, 55, 0.3);
+        }
+
+        .modal-content {
+            background: var(--secondary-black);
+            border: 2px solid var(--primary-gold);
+            border-radius: 20px;
+        }
+
+        .modal-header {
+            border-bottom: 1px solid var(--primary-gold);
+        }
+
+        /* Body Shape Result */
+        .body-shape-result {
+            background: rgba(45, 45, 45, 0.8);
+            border: 2px solid var(--primary-gold);
+            border-radius: 15px;
+            padding: 30px;
+            margin: 20px 0;
+        }
+
+        /* Outfit Card */
+        .outfit-card {
+            background: rgba(45, 45, 45, 0.8);
+            border: 1px solid var(--primary-gold);
+            border-radius: 15px;
+            padding: 20px;
+            margin: 15px 0;
+            transition: transform 0.3s;
+        }
+
+        .outfit-card:hover {
+            transform: scale(1.02);
+        }
+
+        /* Camera Container */
+        .camera-container {
+            position: relative;
+            width: 100%;
+            max-width: 500px;
+            margin: 0 auto;
+            border: 2px solid var(--primary-gold);
+            border-radius: 15px;
+            overflow: hidden;
+        }
+
+        video, canvas {
+            width: 100%;
+            display: block;
+        }
+
+        /* Pricing Cards */
+        .pricing-card {
+            background: rgba(45, 45, 45, 0.8);
+            border: 2px solid var(--primary-gold);
+            border-radius: 20px;
+            padding: 40px;
+            margin: 20px 0;
+            text-align: center;
+            transition: transform 0.3s;
+        }
+
+        .pricing-card:hover {
+            transform: scale(1.05);
+        }
+
+        .price {
+            font-size: 3rem;
+            font-weight: bold;
+            color: var(--primary-gold);
+        }
+
+        /* E-commerce Product */
+        .product-card {
+            background: rgba(45, 45, 45, 0.8);
+            border: 1px solid var(--primary-gold);
+            border-radius: 15px;
+            overflow: hidden;
+            transition: transform 0.3s;
+            margin-bottom: 20px;
+        }
+
+        .product-card:hover {
+            transform: translateY(-5px);
+        }
+
+        .product-img {
+            width: 100%;
+            height: 250px;
+            background: linear-gradient(135deg, rgba(212, 175, 55, 0.2), rgba(255, 215, 0, 0.1));
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 3rem;
+            color: var(--primary-gold);
+        }
+
+        /* Alert Styles */
+        .alert-custom {
+            background: rgba(212, 175, 55, 0.2);
+            border: 1px solid var(--primary-gold);
+            color: white;
+            border-radius: 10px;
+        }
+
+        /* Hide sections by default */
+        .page-section {
+            display: none;
+        }
+
+        .page-section.active {
+            display: block;
+        }
+
+        @media (max-width: 768px) {
+            .hero-title {
+                font-size: 2.5rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Loading Screen -->
+    <div id="loadingScreen">
+        <div class="loader"></div>
+        <h3 class="mt-4" style="color: var(--primary-gold);">Loading Matchfit ID...</h3>
+    </div>
+
+    <!-- Navbar -->
+    <nav class="navbar navbar-expand-lg navbar-dark navbar-custom fixed-top">
+        <div class="container">
+            <a class="navbar-brand" href="#" onclick="showSection('home')">
+                <i class="fas fa-crown"></i> MATCHFIT ID
+            </a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ms-auto">
+                    <li class="nav-item">
+                        <a class="nav-link" href="#" onclick="showSection('home')">Home</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#" onclick="showSection('features')">Fitur</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#" onclick="showSection('shop')">Belanja</a>
+                    </li>
+                    <li class="nav-item" id="navLogin">
+                        <button class="btn btn-gold btn-sm" onclick="showLoginModal()">Login</button>
+                    </li>
+                    <li class="nav-item d-none" id="navUser">
+                        <div class="dropdown">
+                            <button class="btn btn-gold btn-sm dropdown-toggle" type="button" data-bs-toggle="dropdown">
+                                <i class="fas fa-user"></i> <span id="userName"></span>
+                            </button>
+                            <ul class="dropdown-menu">
+                                <li><a class="dropdown-item" href="#" onclick="logout()">Logout</a></li>
+                            </ul>
+                        </div>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Home Section -->
+    <section id="home" class="page-section active">
+        <div class="hero-section">
+            <div class="container">
+                <div class="row align-items-center">
+                    <div class="col-lg-6">
+                        <h1 class="hero-title">MATCHFIT ID</h1>
+                        <p class="lead mb-4">Temukan Style Sempurna dengan AI Fashion Assistant</p>
+                        <p class="mb-4">Analisis bentuk tubuh, warna kulit, dan dapatkan rekomendasi outfit yang sempurna untuk setiap acara.</p>
+                        <button class="btn btn-gold btn-lg me-3" onclick="showPricingModal()">
+                            <i class="fas fa-rocket"></i> Coba Sekarang Gratis
+                        </button>
+                        <button class="btn btn-outline-light btn-lg" onclick="showSection('features')">
+                            Pelajari Lebih Lanjut
+                        </button>
+                    </div>
+                    <div class="col-lg-6">
+                        <div class="text-center">
+                            <i class="fas fa-tshirt" style="font-size: 15rem; color: var(--primary-gold); opacity: 0.3;"></i>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Preview Features -->
+        <div class="container py-5">
+            <h2 class="text-center mb-5" style="color: var(--primary-gold);">Fitur Unggulan</h2>
+            <div class="row">
+                <div class="col-md-4">
+                    <div class="feature-card">
+                        <div class="feature-icon">
+                            <i class="fas fa-user-check"></i>
+                        </div>
+                        <h4 class="text-center mb-3">Body Shape Detector</h4>
+                        <p class="text-center">AI menganalisis bentuk tubuh Anda dan memberikan rekomendasi outfit yang paling cocok</p>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="feature-card">
+                        <div class="feature-icon">
+                            <i class="fas fa-palette"></i>
+                        </div>
+                        <h4 class="text-center mb-3">Mix & Match Generator</h4>
+                        <p class="text-center">Kombinasi outfit sempurna berdasarkan bentuk tubuh, warna kulit, dan gaya pribadi</p>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="feature-card">
+                        <div class="feature-icon">
+                            <i class="fas fa-camera"></i>
+                        </div>
+                        <h4 class="text-center mb-3">Virtual Try-On</h4>
+                        <p class="text-center">Coba outfit secara virtual dengan teknologi AR dan AI</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Features Section (Requires Login) -->
+    <section id="features" class="page-section">
+        <div class="container py-5" style="padding-top: 100px !important;">
+            <h2 class="text-center mb-5" style="color: var(--primary-gold);">Fitur AI Fashion Assistant</h2>
+            
+            <!-- Feature 1: Body Shape Detector -->
+            <div class="feature-card" id="feature1">
+                <h3 class="mb-4"><i class="fas fa-user-check"></i> AI Body Shape Detector & Color Analyst</h3>
+                <p class="mb-4">Upload foto atau input data tubuh Anda untuk mendapatkan analisis bentuk tubuh dan rekomendasi warna yang cocok.</p>
+                
+                <div class="row">
+                    <div class="col-md-6">
+                        <h5 class="mb-3">Pilih Metode Input:</h5>
+                        <div class="btn-group-vertical w-100 mb-3">
+                            <button class="btn btn-gold mb-2" onclick="showUploadPhoto()">
+                                <i class="fas fa-upload"></i> Upload Foto
+                            </button>
+                            <button class="btn btn-gold mb-2" onclick="showManualInput()">
+                                <i class="fas fa-keyboard"></i> Input Manual
+                            </button>
+                            <button class="btn btn-gold mb-2" onclick="requestCameraAccess()">
+                                <i class="fas fa-camera"></i> Gunakan Kamera
+                            </button>
+                        </div>
+
+                        <!-- Upload Photo -->
+                        <div id="uploadPhotoSection" class="d-none">
+                            <input type="file" class="form-control mb-3" id="photoUpload" accept="image/*" onchange="handlePhotoUpload(event)">
+                            <div id="photoPreview"></div>
+                        </div>
+
+                        <!-- Manual Input -->
+                        <div id="manualInputSection" class="d-none">
+                            <input type="number" class="form-control mb-2" id="height" placeholder="Tinggi (cm)">
+                            <input type="number" class="form-control mb-2" id="weight" placeholder="Berat (kg)">
+                            <input type="number" class="form-control mb-2" id="shoulder" placeholder="Lebar Bahu (cm)">
+                            <input type="number" class="form-control mb-2" id="waist" placeholder="Lingkar Pinggang (cm)">
+                            <input type="number" class="form-control mb-2" id="hip" placeholder="Lingkar Pinggul (cm)">
+                            <button class="btn btn-gold w-100" onclick="analyzeBody()">Analisis Sekarang</button>
+                        </div>
+
+                        <!-- Camera Section -->
+                        <div id="cameraSection" class="d-none">
+                            <div class="camera-container">
+                                <video id="video" autoplay></video>
+                                <canvas id="canvas" class="d-none"></canvas>
+                            </div>
+                            <button class="btn btn-gold w-100 mt-3" onclick="capturePhoto()">
+                                <i class="fas fa-camera"></i> Ambil Foto
+                            </button>
+                        </div>
+                    </div>
+
+                    <div class="col-md-6">
+                        <div id="bodyShapeResult" class="d-none">
+                            <div class="body-shape-result">
+                                <h4 class="mb-3" style="color: var(--primary-gold);">Hasil Analisis</h4>
+                                <div id="resultContent"></div>
+                                <button class="btn btn-gold w-100 mt-3" onclick="showFeature2()">
+                                    Dapatkan Rekomendasi Outfit
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Feature 2: Mix & Match Generator -->
+            <div class="feature-card mt-5" id="feature2">
+                <h3 class="mb-4"><i class="fas fa-palette"></i> AI Mix & Match Generator</h3>
+                <p class="mb-4">Dapatkan kombinasi outfit sempurna berdasarkan analisis bentuk tubuh Anda.</p>
+                
+                <div id="mixMatchContent" class="d-none">
+                    <div class="row mb-3">
+                        <div class="col-md-6">
+                            <label class="form-label">Pilih Gaya:</label>
+                            <select class="form-control" id="styleSelect">
+                                <option value="casual">Casual</option>
+                                <option value="formal">Formal</option>
+                                <option value="sporty">Sporty</option>
+                                <option value="elegant">Elegant</option>
+                                <option value="street">Street Style</option>
+                            </select>
+                        </div>
+                        <div class="col-md-6">
+                            <label class="form-label">Untuk Acara:</label>
+                            <select class="form-control" id="eventSelect">
+                                <option value="daily">Sehari-hari</option>
+                                <option value="office">Kantor</option>
+                                <option value="party">Pesta</option>
+                                <option value="date">Kencan</option>
+                                <option value="sport">Olahraga</option>
+                            </select>
+                        </div>
+                    </div>
+                    <button class="btn btn-gold w-100" onclick="generateOutfit()">
+                        <i class="fas fa-magic"></i> Generate Outfit
+                    </button>
+
+                    <div id="outfitResults" class="mt-4"></div>
+                </div>
+            </div>
+
+            <!-- Feature 3: Virtual Try-On -->
+            <div class="feature-card mt-5" id="feature3">
+                <h3 class="mb-4"><i class="fas fa-camera"></i> Virtual Try-On</h3>
+                <p class="mb-4">Coba outfit secara virtual dengan teknologi AR.</p>
+                
+                <div id="tryOnContent" class="d-none">
+                    <div class="alert alert-custom mb-3">
+                        <i class="fas fa-info-circle"></i> Fitur ini memerlukan akses kamera untuk pengalaman AR terbaik.
+                    </div>
+                    <button class="btn btn-gold" onclick="startTryOn()">
+                        <i class="fas fa-play"></i> Mulai Virtual Try-On
+                    </button>
+                    <div id="tryOnViewer" class="mt-4"></div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Shop Section -->
+    <section id="shop" class="page-section">
+        <div class="container py-5" style="padding-top: 100px !important;">
+            <h2 class="text-center mb-5" style="color: var(--primary-gold);">E-Commerce Fashion</h2>
+            
+            <div class="row mb-4">
+                <div class="col-md-3">
+                    <select class="form-control">
+                        <option>Semua Kategori</option>
+                        <option>Atasan</option>
+                        <option>Bawahan</option>
+                        <option>Dress</option>
+                        <option>Outerwear</option>
+                        <option>Aksesoris</option>
+                    </select>
+                </div>
+                <div class="col-md-6">
+                    <input type="text" class="form-control" placeholder="Cari produk...">
+                </div>
+                <div class="col-md-3">
+                    <select class="form-control">
+                        <option>Urutkan</option>
+                        <option>Harga Terendah</option>
+                        <option>Harga Tertinggi</option>
+                        <option>Terbaru</option>
+                    </select>
+                </div>
+            </div>
+
+            <div class="row" id="productList">
+                <!-- Products will be generated here -->
+            </div>
+        </div>
+    </section>
+
+    <!-- Login Modal -->
+    <div class="modal fade" id="loginModal" tabindex="-1">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" style="color: var(--primary-gold);">
+                        <span id="modalTitle">Sign In</span>
+                    </h5>
+                    <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal"></button>
+                </div>
+                <div class="modal-body">
+                    <!-- Login Form -->
+                    <div id="loginForm">
+                        <div class="mb-3">
+                            <label class="form-label">Email</label>
+                            <input type="email" class="form-control" id="loginEmail" placeholder="email@example.com">
+                        </div>
+                        <div class="mb-3">
+                            <label class="form-label">Password</label>
+                            <div class="input-group">
+                                <input type="password" class="form-control" id="loginPassword" placeholder="Password">
+                                <button class="btn btn-outline-secondary" type="button" onclick="togglePassword('loginPassword')">
+                                    <i class="fas fa-eye"></i>
+                                </button>
+                            </div>
+                        </div>
+                        <div class="mb-3 form-check">
+                            <input type="checkbox" class="form-check-input" id="rememberMe">
+                            <label class="form-check-label" for="rememberMe">Remember Me</label>
+                        </div>
+                        <button class="btn btn-gold w-100 mb-2" onclick="login()">Login</button>
+                        <div class="text-center">
+                            <a href="#" class="text-decoration-none" style="color: var(--primary-gold);" onclick="showForgotPassword()">Forgot Password?</a>
+                        </div>
+                        <hr style="border-color: var(--primary-gold);">
+                        <p class="text-center">Belum punya akun?</p>
+                        <button class="btn btn-outline-light w-100" onclick="showRegisterForm()">Create Account</button>
+                    </div>
+
+                    <!-- Register Form -->
+                    <div id="registerForm" class="d-none">
+                        <div class="mb-3">
+                            <label class="form-label">Nama Lengkap</label>
+                            <input type="text" class="form-control" id="registerName" placeholder="Nama Anda">
+                        </div>
+                        <div class="mb-3">
+                            <label class="form-label">Email</label>
+                            <input type="email" class="form-control" id="registerEmail" placeholder="email@example.com">
+                        </div>
+                        <div class="mb-3">
+                            <label class="form-label">Password (minimal 6 karakter)</label>
+                            <div class="input-group">
+                                <input type="password" class="form-control" id="registerPassword" placeholder="Password">
+                                <button class="btn btn-outline-secondary" type="button" onclick="togglePassword('registerPassword')">
+                                    <i class="fas fa-eye"></i>
+                                </button>
+                            </div>
+                        </div>
+                        <button class="btn btn-gold w-100 mb-2" onclick="register()">Register</button>
+                        <button class="btn btn-outline-light w-100" onclick="showLoginForm()">Kembali ke Login</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Pricing Modal -->
+    <div class="modal fade" id="pricingModal" tabindex="-1">
+        <div class="modal-dialog modal-lg modal-dialog-centered">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" style="color: var(--primary-gold);">Pilih Paket Berlangganan</h5>
+                    <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal"></button>
+                </div>
+                <div class="modal-body">
+                    <div class="row">
+                        <div class="col-md-6">
+                            <div class="pricing-card">
+                                <h4 style="color: var(--primary-gold);">Trial Gratis</h4>
+                                <div class="price">Rp 0</div>
+                                <p class="mb-4">1 Bulan</p>
+                                <ul class="text-start">
+                                    <li>✓ AI Body Shape Detector</li>
+                                    <li>✓ Mix & Match Generator</li>
+                                    <li>✓ Virtual Try-On</li>
+                                    <li>✓ Akses E-Commerce</li>
+                                </ul>
+                                <button class="btn btn-gold w-100" onclick="selectPlan('trial')">Coba Gratis</button>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="pricing-card">
+                                <div class="badge bg-warning text-dark mb-2">POPULER</div>
+                                <h4 style="color: var(--primary-gold);">Premium</h4>
+                                <div class="price">Rp 99.988</div>
+                                <p class="mb-4">3 Bulan</p>
+                                <ul class="text-start">
+                                    <li>✓ Semua Fitur Trial</li>
+                                    <li>✓ AI Analysis Unlimited</li>
+                                    <li>✓ Prioritas Customer Support</li>
+                                    <li>✓ Diskon Belanja 10%</li>
+                                </ul>
+                                <button class="btn btn-gold w-100" onclick="selectPlan('premium')">Berlangganan</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script>
+        // Global Variables
+        let currentUser = null;
+        let bodyShapeData = null;
+        let videoStream = null;
+
+        // Initialize
+        document.addEventListener('DOMContentLoaded', function() {
+            setTimeout(() => {
+                document.getElementById('loadingScreen').style.display = 'none';
+                checkSession();
+                generateProducts();
+            }, 2000);
+        });
+
+        // Session Management
+        function checkSession() {
+            const session = localStorage.getItem('matchfitSession');
+            if (session) {
+                currentUser = JSON.parse(session);
+                updateNavbar();
+            }
+        }
+
+        function updateNavbar() {
+            if (currentUser) {
+                document.getElementById('navLogin').classList.add('d-none');
+                document.getElementById('navUser').classList.remove('d-none');
+                document.getElementById('userName').textContent = currentUser.name;
+            } else {
+                document.getElementById('navLogin').classList.remove('d-none');
+                document.getElementById('navUser').classList.add('d-none');
+            }
+        }
+
+        // Navigation
+        function showSection(section) {
+            document.querySelectorAll('.page-section').forEach(s => s.classList.remove('active'));
+            document.getElementById(section).classList.add('active');
+            window.scrollTo(0, 0);
+        }
+
+        // Authentication
+        function showLoginModal() {
+            new bootstrap.Modal(document.getElementById('loginModal')).show();
+        }
+
+        function showPricingModal() {
+            new bootstrap.Modal(document.getElementById('pricingModal')).show();
+        }
+
+        function showLoginForm() {
+            document.getElementById('loginForm').classList.remove('d-none');
+            document.getElementById('registerForm').classList.add('d-none');
+            document.getElementById('modalTitle').textContent = 'Sign In';
+        }
+
+        function showRegisterForm() {
+            document.getElementById('loginForm').classList.add('d-none');
+            document.getElementById('registerForm').classList.remove('d-none');
+            document.getElementById('modalTitle').textContent = 'Create Account';
+        }
+
+        function togglePassword(inputId) {
+            const input = document.getElementById(inputId);
+            input.type = input.type === 'password' ? 'text' : 'password';
+        }
+
+        function login() {
+            const email = document.getElementById('loginEmail').value;
+            const password = document.getElementById('loginPassword').value;
+            const remember = document.getElementById('rememberMe').checked;
+
+            if (!email || !password) {
+                alert('Mohon isi semua field!');
+                return;
+            }
+
+            const users = JSON.parse(localStorage.getItem('matchfitUsers') || '[]');
+            const user = users.find(u => u.email === email && u.password === btoa(password));
+
+            if (user) {
+                currentUser = { name: user.name, email: user.email };
+                if (remember) {
+                    localStorage.setItem('matchfitSession', JSON.stringify(currentUser));
+                }
+                updateNavbar();
+                bootstrap.Modal.getInstance(document.getElementById('loginModal')).hide();
+                showNotification('Login berhasil! Selamat datang ' + user.name);
+                showSection('features');
+            } else {
+                showNotification('Email atau password salah!', 'error');
+            }
+        }
+
+        function register() {
+            const name = document.getElementById('registerName').value;
+            const email = document.getElementById('registerEmail').value;
+            const password = document.getElementById('registerPassword').value;
+
+            if (!name || !email || !password) {
+                alert('Mohon isi semua field!');
+                return;
+            }
+
+            if (!validateEmail(email)) {
+                alert('Email tidak valid!');
+                return;
+            }
+
+            if (password.length < 6) {
+                alert('Password minimal 6 karakter!');
+                return;
+            }
+
+            const users = JSON.parse(localStorage.getItem('matchfitUsers') || '[]');
+            
+            if (users.find(u => u.email === email)) {
+                alert('Email sudah terdaftar!');
+                return;
+            }
+
+            users.push({ name, email, password: btoa(password) });
+            localStorage.setItem('matchfitUsers', JSON.stringify(users));
+            
+            showNotification('Registrasi berhasil! Silakan login.');
+            showLoginForm();
+        }
+
+        function logout() {
+            localStorage.removeItem('matchfitSession');
+            currentUser = null;
+            bodyShapeData = null;
+            updateNavbar();
+            showSection('home');
+            showNotification('Logout berhasil!');
+        }
+
+        function validateEmail(email) {
+            return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
+        }
+
+        function showForgotPassword() {
+            alert('Fitur reset password akan segera hadir. Silakan hubungi support@matchfit.id');
+        }
+
+        function selectPlan(plan) {
+            if (!currentUser) {
+                bootstrap.Modal.getInstance(document.getElementById('pricingModal')).hide();
+                setTimeout(showLoginModal, 300);
+            } else {
+                showNotification('Paket ' + plan + ' berhasil diaktifkan!');
+                bootstrap.Modal.getInstance(document.getElementById('pricingModal')).hide();
+                showSection('features');
+            }
+        }
+
+        // Feature 1: Body Shape Detector
+        function showUploadPhoto() {
+            hideAllInputSections();
+            document.getElementById('uploadPhotoSection').classList.remove('d-none');
+        }
+
+        function showManualInput() {
+            hideAllInputSections();
+            document.getElementById('manualInputSection').classList.remove('d-none');
+        }
+
+        function requestCameraAccess() {
+            if (!checkLogin()) return;
+            
+            hideAllInputSections();
+            document.getElementById('cameraSection').classList.remove('d-none');
+            
+            navigator.mediaDevices.getUserMedia({ video: true })
+                .then(stream => {
+                    videoStream = stream;
+                    document.getElementById('video').srcObject = stream;
+                    showNotification('Kamera berhasil diakses!');
+                })
+                .catch(err => {
+                    showNotification('Gagal mengakses kamera. Mohon izinkan akses kamera.', 'error');
+                });
+        }
+
+        function hideAllInputSections() {
+            document.getElementById('uploadPhotoSection').classList.add('d-none');
+            document.getElementById('manualInputSection').classList.add('d-none');
+            document.getElementById('cameraSection').classList.add('d-none');
+        }
+
+        function handlePhotoUpload(event) {
+            const file = event.target.files[0];
+            if (file) {
+                const reader = new FileReader();
+                reader.onload = function(e) {
+                    const preview = document.getElementById('photoPreview');
+                    preview.innerHTML = `
+                        <img src="${e.target.result}" class="img-fluid rounded mb-3" style="max-height: 400px;">
+                        <button class="btn btn-gold w-100" onclick="analyzePhotoBody()">Analisis Foto</button>
+                    `;
+                };
+                reader.readAsDataURL(file);
+            }
+        }
+
+        function capturePhoto() {
+            const video = document.getElementById('video');
+            const canvas = document.getElementById('canvas');
+            canvas.width = video.videoWidth;
+            canvas.height = video.videoHeight;
+            canvas.getContext('2d').drawImage(video, 0, 0);
+            
+            if (videoStream) {
+                videoStream.getTracks().forEach(track => track.stop());
+            }
+            
+            canvas.classList.remove('d-none');
+            video.classList.add('d-none');
+            
+            setTimeout(() => analyzePhotoBody(), 500);
+        }
+
+        function analyzeBody() {
+            if (!checkLogin()) return;
+
+            const height = document.getElementById('height').value;
+            const weight = document.getElementById('weight').value;
+            const shoulder = document.getElementById('shoulder').value;
+            const waist = document.getElementById('waist').value;
+            const hip = document.getElementById('hip').value;
+
+            if (!height || !weight || !shoulder || !waist || !hip) {
+                alert('Mohon isi semua field!');
+                return;
+            }
+
+            // Simulate AI Analysis
+            showNotification('Menganalisis data...');
+            setTimeout(() => {
+                bodyShapeData = determineBodyShape(shoulder, waist, hip);
+                displayBodyShapeResult(bodyShapeData);
+            }, 2000);
+        }
+
+        function analyzePhotoBody() {
+            if (!checkLogin()) return;
+
+            showNotification('Menganalisis foto...');
+            setTimeout(() => {
+                // Simulate AI photo analysis
+                bodyShapeData = {
+                    shape: 'Hourglass',
+                    somatotype: 'Mesomorph',
+                    skinTone: 'Medium',
+                    undertone: 'Warm'
+                };
+                displayBodyShapeResult(bodyShapeData);
+            }, 3000);
+        }
+
+        function determineBodyShape(shoulder, waist, hip) {
+            const shoulderNum = parseFloat(shoulder);
+            const waistNum = parseFloat(waist);
+            const hipNum = parseFloat(hip);
+
+            let shape = '';
+            let somatotype = '';
+
+            // Determine shape
+            if (Math.abs(shoulderNum - hipNum) < 5 && waistNum < shoulderNum * 0.75) {
+                shape = 'Hourglass (Jam Pasir)';
+            } else if (shoulderNum > hipNum * 1.05) {
+                shape = 'Inverted Triangle (Segitiga Terbalik)';
+            } else if (hipNum > shoulderNum * 1.05) {
+                shape = 'Pear (Pir)';
+            } else if (Math.abs(shoulderNum - waistNum) < 10 && Math.abs(waistNum - hipNum) < 10) {
+                shape = 'Rectangle (Persegi Panjang)';
+            } else {
+                shape = 'Oval (Apple)';
+            }
+
+            // Simulate somatotype
+            const bmi = Math.random() * 10 + 18;
+            if (bmi < 20) somatotype = 'Ectomorph';
+            else if (bmi < 25) somatotype = 'Mesomorph';
+            else somatotype = 'Endomorph';
+
+            return {
+                shape: shape,
+                somatotype: somatotype,
+                skinTone: 'Medium',
+                undertone: 'Warm'
+            };
+        }
+
+        function displayBodyShapeResult(data) {
+            const resultDiv = document.getElementById('resultContent');
+            resultDiv.innerHTML = `
+                <div class="mb-3">
+                    <h5 style="color: var(--primary-gold);">Bentuk Tubuh: ${data.shape}</h5>
+                    <p><strong>Somatotip:</strong> ${data.somatotype}</p>
+                    <p><strong>Warna Kulit:</strong> ${data.skinTone}</p>
+                    <p><strong>Undertone:</strong> ${data.undertone}</p>
+                </div>
+                <div class="alert alert-custom">
+                    <h6>Tips Berpakaian:</h6>
+                    <ul class="mb-0">
+                        <li>Pilih pakaian yang menyeimbangkan proporsi tubuh</li>
+                        <li>Gunakan warna yang sesuai dengan undertone kulit</li>
+                        <li>Highlight bagian terbaik dari bentuk tubuh Anda</li>
+                    </ul>
+                </div>
+            `;
+            document.getElementById('bodyShapeResult').classList.remove('d-none');
+            showNotification('Analisis selesai!');
+        }
+
+        function showFeature2() {
+            document.getElementById('mixMatchContent').classList.remove('d-none');
+            document.getElementById('feature2').scrollIntoView({ behavior: 'smooth' });
+        }
+
+        // Feature 2: Mix & Match Generator
+        function generateOutfit() {
+            if (!bodyShapeData) {
+                alert('Mohon lakukan analisis bentuk tubuh terlebih dahulu!');
+                return;
+            }
+
+            const style = document.getElementById('styleSelect').value;
+            const event = document.getElementById('eventSelect').value;
+
+            showNotification('Generating outfit...');
+            
+            setTimeout(() => {
+                const outfits = [
+                    {
+                        name: 'Elegant Evening Look',
+                        top: 'Blouse Silk Cream',
+                        bottom: 'Celana Palazzo Hitam',
+                        shoes: 'Heels Gold',
+                        accessories: 'Clutch & Anting Mutiara',
+                        reason: 'Kombinasi ini sempurna untuk bentuk tubuh ' + bodyShapeData.shape + ' dengan undertone ' + bodyShapeData.undertone
+                    },
+                    {
+                        name: 'Casual Chic',
+                        top: 'T-shirt Basic Putih',
+                        bottom: 'Jeans Skinny Dark Blue',
+                        shoes: 'Sneakers Putih',
+                        accessories: 'Tote Bag & Watch',
+                        reason: 'Outfit ini memberikan kesan santai namun tetap stylish'
+                    },
+                    {
+                        name: 'Office Professional',
+                        top: 'Kemeja Formal Navy',
+                        bottom: 'Rok Pensil Abu-abu',
+                        shoes: 'Pumps Hitam',
+                        accessories: 'Blazer & Satchel Bag',
+                        reason: 'Profesional dan sesuai dengan proporsi tubuh Anda'
+                    }
+                ];
+
+                let html = '<h5 class="mb-4" style="color: var(--primary-gold);">Rekomendasi Outfit untuk Anda:</h5>';
+                outfits.forEach(outfit => {
+                    html += `
+                        <div class="outfit-card">
+                            <h6 style="color: var(--primary-gold);">${outfit.name}</h6>
+                            <p><strong>Atasan:</strong> ${outfit.top}</p>
+                            <p><strong>Bawahan:</strong> ${outfit.bottom}</p>
+                            <p><strong>Sepatu:</strong> ${outfit.shoes}</p>
+                            <p><strong>Aksesoris:</strong> ${outfit.accessories}</p>
+                            <p class="text-muted"><em>${outfit.reason}</em></p>
+                            <button class="btn btn-gold btn-sm me-2" onclick="tryOnOutfit('${outfit.name}')">
+                                <i class="fas fa-camera"></i> Coba Virtual Try-On
+                            </button>
+                            <button class="btn btn-outline-light btn-sm" onclick="shopOutfit()">
+                                <i class="fas fa-shopping-bag"></i> Belanja Outfit Ini
+                            </button>
+                        </div>
+                    `;
+                });
+
+                document.getElementById('outfitResults').innerHTML = html;
+                showNotification('Outfit berhasil di-generate!');
+            }, 2000);
+        }
+
+        function tryOnOutfit(outfitName) {
+            document.getElementById('tryOnContent').classList.remove('d-none');
+            document.getElementById('feature3').scrollIntoView({ behavior: 'smooth' });
+            showNotification('Mempersiapkan Virtual Try-On untuk ' + outfitName);
+        }
+
+        function shopOutfit() {
+            showSection('shop');
+            showNotification('Mengarahkan ke halaman belanja...');
+        }
+
+        // Feature 3: Virtual Try-On
+        function startTryOn() {
+            showNotification('Memulai Virtual Try-On...');
+            
+            setTimeout(() => {
+                document.getElementById('tryOnViewer').innerHTML = `
+                    <div class="camera-container">
+                        <div style="background: rgba(45, 45, 45, 0.8); padding: 100px; text-align: center; border-radius: 15px;">
+                            <i class="fas fa-user" style="font-size: 10rem; color: var(--primary-gold);"></i>
+                            <p class="mt-3">Virtual Try-On Demo</p>
+                            <p class="text-muted">Fitur AR akan menampilkan outfit di tubuh Anda secara real-time</p>
+                            <button class="btn btn-gold mt-3" onclick="saveOutfit()">
+                                <i class="fas fa-save"></i> Simpan Tampilan
+                            </button>
+                        </div>
+                    </div>
+                `;
+            }, 1000);
+        }
+
+        function saveOutfit() {
+            showNotification('Tampilan berhasil disimpan!');
+        }
+
+        // E-Commerce
+        function generateProducts() {
+            const products = [
+                { name: 'Blouse Elegant', price: 299000, category: 'Atasan' },
+                { name: 'Celana Palazzo', price: 399000, category: 'Bawahan' },
+                { name: 'Dress Maxi', price: 599000, category: 'Dress' },
+                { name: 'Blazer Premium', price: 899000, category: 'Outerwear' },
+                { name: 'Clutch Gold', price: 199000, category: 'Aksesoris' },
+                { name: 'Heels Classic', price: 499000, category: 'Sepatu' },
+                { name: 'T-shirt Basic', price: 149000, category: 'Atasan' },
+                { name: 'Jeans Skinny', price: 349000, category: 'Bawahan' },
+            ];
+
+            let html = '';
+            products.forEach(product => {
+                html += `
+                    <div class="col-md-3">
+                        <div class="product-card">
+                            <div class="product-img">
+                                <i class="fas fa-tshirt"></i>
+                            </div>
+                            <div class="p-3">
+                                <h6>${product.name}</h6>
+                                <p class="mb-2" style="color: var(--primary-gold); font-size: 1.2rem;">
+                                    Rp ${product.price.toLocaleString('id-ID')}
+                                </p>
+                                <button class="btn btn-gold btn-sm w-100">
+                                    <i class="fas fa-shopping-cart"></i> Beli
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                `;
+            });
+
+            document.getElementById('productList').innerHTML = html;
+        }
+
+        // Utilities
+        function checkLogin() {
+            if (!currentUser) {
+                showNotification('Mohon login terlebih dahulu!', 'error');
+                showPricingModal();
+                return false;
+            }
+            return true;
+        }
+
+        function showNotification(message, type = 'success') {
+            const color = type === 'success' ? 'var(--primary-gold)' : '#ff4444';
+            const notification = document.createElement('div');
+            notification.style.cssText = `
+                position: fixed;
+                top: 80px;
+                right: 20px;
+                background: ${color};
+                color: var(--primary-black);
+                padding: 15px 25px;
+                border-radius: 10px;
+                font-weight: bold;
+                z-index: 10000;
+                animation: slideIn 0.3s ease;
+            `;
+            notification.textContent = message;
+            document.body.appendChild(notification);
+
+            setTimeout(() => {
+                notification.style.animation = 'slideOut 0.3s ease';
+                setTimeout(() => notification.remove(), 300);
+            }, 3000);
+        }
+    </script>
+
+    <style>
+        @keyframes slideIn {
+            from {
+                transform: translateX(400px);
+                opacity: 0;
+            }
+            to {
+                transform: translateX(0);
+                opacity: 1;
+            }
+        }
+
+        @keyframes slideOut {
+            from {
+                transform: translateX(0);
+                opacity: 1;
+            }
+            to {
+                transform: translateX(400px);
+                opacity: 0;
+            }
+        }
+    </style>
+</body>
+</html>
+>>>>>>> ee3eba378ce08904960c5c34e591c9ab32421710

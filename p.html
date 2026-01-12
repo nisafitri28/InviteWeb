@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html>
+<body>
+
+<button onclick="embed()">Test Embedding</button>
+<pre id="out"></pre>
+
+<script>
+const API_KEY = "xxx";
+
+
+/**
+ * Embed a given text into a vector space using the Gemini API's embedding-001 model.
+ * 
+ * @returns {Promise} A promise that resolves with the JSON response from the API call.
+ */
+async function embed() {
+  const res = await fetch(
+    "https://generativelanguage.googleapis.com/v1beta/models/embedding-001:embedContent?key=" + API_KEY,
+    {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({
+        content: { parts: [{ text: "Halo dunia" }] }
+      })
+    }
+  );
+
+  const data = await res.json();
+  document.getElementById("out").textContent =
+    JSON.stringify(data, null, 2);
+}
+</script>
+
+</body>
+</html>

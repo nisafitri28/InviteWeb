@@ -1,0 +1,874 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>AI Fashion Assistant - Gemini</title>
+
+  <style>
+    :root {
+      --primary: #667eea;
+      --primary2: #764ba2;
+      --bg: #f4f6fb;
+      --text: #1f2937;
+      --muted: #6b7280;
+      --card: #ffffff;
+      --border: rgba(0,0,0,0.08);
+    }
+
+    * { box-sizing: border-box; }
+    body {
+      margin: 0;
+      font-family: Arial, Helvetica, sans-serif;
+      background: var(--bg);
+      color: var(--text);
+    }
+
+    .container {
+      max-width: 1100px;
+      margin: 30px auto;
+      padding: 0 16px;
+    }
+
+    .header {
+      background: linear-gradient(135deg, var(--primary), var(--primary2));
+      color: white;
+      border-radius: 14px;
+      padding: 26px 22px;
+      margin-bottom: 18px;
+    }
+
+    .header h1 { margin: 0 0 6px; font-size: 26px; }
+    .header p { margin: 0; opacity: 0.95; }
+
+    .card {
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: 14px;
+      padding: 18px;
+      box-shadow: 0 6px 18px rgba(0,0,0,0.06);
+      margin-bottom: 16px;
+    }
+
+    .api-key-section h3 { margin: 0 0 10px; }
+    .api-key-row {
+      display: grid;
+      grid-template-columns: 1fr auto;
+      gap: 10px;
+      align-items: center;
+      margin-top: 10px;
+    }
+
+    input[type="text"], input[type="number"], select {
+      width: 100%;
+      padding: 12px 12px;
+      border-radius: 10px;
+      border: 1px solid rgba(0,0,0,0.15);
+      outline: none;
+      background: #fff;
+    }
+
+    input[type="file"] { display: none; }
+
+    .btn {
+      background: linear-gradient(135deg, var(--primary), var(--primary2));
+      color: white;
+      border: none;
+      padding: 12px 14px;
+      border-radius: 10px;
+      cursor: pointer;
+      font-weight: 700;
+      transition: transform 0.06s ease;
+      white-space: nowrap;
+    }
+    .btn:active { transform: scale(0.98); }
+    .btn-secondary {
+      background: #111827;
+    }
+
+    .tabs {
+      display: flex;
+      gap: 10px;
+      flex-wrap: wrap;
+      margin-bottom: 14px;
+    }
+    .tab {
+      padding: 10px 14px;
+      border-radius: 999px;
+      background: #e9edf7;
+      border: 1px solid rgba(0,0,0,0.08);
+      cursor: pointer;
+      font-weight: 700;
+      color: #2b2f3a;
+    }
+    .tab.active {
+      background: linear-gradient(135deg, var(--primary), var(--primary2));
+      color: #fff;
+      border-color: transparent;
+    }
+
+    .feature-section { display: none; }
+    .feature-section.active { display: block; }
+
+    .grid-2 {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 12px;
+    }
+
+    .input-group { margin: 12px 0; }
+    .input-group label {
+      display: block;
+      font-weight: 700;
+      margin-bottom: 6px;
+      color: #111827;
+    }
+
+    .alert {
+      padding: 12px 14px;
+      border-radius: 10px;
+      margin: 10px 0;
+      border: 1px solid rgba(0,0,0,0.06);
+    }
+    .alert-info { background: #cfe2ff; color: #084298; }
+    .alert-warning { background: #fff3cd; color: #856404; }
+    .alert-danger { background: #f8d7da; color: #721c24; }
+    .alert-success { background: #d1e7dd; color: #0f5132; }
+
+    .loading {
+      display: none;
+      margin-top: 14px;
+      padding: 14px;
+      border-radius: 12px;
+      background: #f1f5ff;
+      border: 1px dashed rgba(102,126,234,0.35);
+      align-items: center;
+      gap: 12px;
+    }
+    .loading.active { display: flex; }
+
+    .spinner {
+      width: 24px;
+      height: 24px;
+      border: 3px solid rgba(0,0,0,0.12);
+      border-top: 3px solid var(--primary);
+      border-radius: 50%;
+      animation: spin 0.8s linear infinite;
+    }
+    @keyframes spin { 0% { transform: rotate(0deg);} 100% { transform: rotate(360deg);} }
+
+    .result-box {
+      background: #f8f9fa;
+      border-radius: 12px;
+      padding: 18px;
+      margin-top: 16px;
+      border-left: 5px solid var(--primary);
+    }
+    .result-item {
+      background: white;
+      padding: 14px;
+      margin: 10px 0;
+      border-radius: 10px;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.06);
+    }
+
+    .outfit-card {
+      background: white;
+      border-radius: 12px;
+      padding: 16px;
+      margin: 12px 0;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+      border: 1px solid rgba(0,0,0,0.05);
+    }
+    .outfit-card h4 { margin: 0 0 8px; }
+
+    .file-upload {
+      border: 2px dashed rgba(0,0,0,0.18);
+      padding: 18px;
+      border-radius: 12px;
+      cursor: pointer;
+      background: #fff;
+      text-align: center;
+    }
+
+    .preview-image {
+      max-width: 100%;
+      width: 280px;
+      border-radius: 12px;
+      margin-top: 10px;
+      display: none;
+      border: 1px solid rgba(0,0,0,0.1);
+    }
+
+    @media (max-width: 768px) {
+      .grid-2 { grid-template-columns: 1fr; }
+      .api-key-row { grid-template-columns: 1fr; }
+      .btn { width: 100%; }
+    }
+  </style>
+</head>
+
+<body>
+  <div class="container">
+    <div class="header">
+      <h1>AI Fashion Assistant</h1>
+      <p>Analisis bentuk tubuh, rekomendasi outfit, dan virtual try-on deskriptif (Gemini API)</p>
+    </div>
+
+    <div class="card api-key-section">
+      <h3>Setup API Key Gemini</h3>
+      <div class="alert alert-info">
+        Simpan API key Anda di browser (localStorage). Jika halaman ini dipublikasikan, siapa pun bisa melihat key Anda dari DevTools.
+      </div>
+
+      <div class="api-key-row">
+        <input type="text" id="apiKeyInput" placeholder="Paste API Key Anda (AIza...)" />
+        <button class="btn" onclick="saveApiKey()">Simpan API Key</button>
+      </div>
+
+      <div id="apiStatus" class="alert alert-warning" style="margin-top: 10px;">
+        API Key belum diatur.
+      </div>
+
+      <button class="btn btn-secondary" onclick="clearApiKey()">Hapus API Key</button>
+    </div>
+
+    <div class="card">
+      <div class="tabs">
+        <div class="tab active" onclick="switchTab(0)">Fitur 1: Analisis</div>
+        <div class="tab" onclick="switchTab(1)">Fitur 2: Mix & Match</div>
+        <div class="tab" onclick="switchTab(2)">Fitur 3: Virtual Try-On</div>
+      </div>
+
+      <!-- FEATURE 1 -->
+      <div class="feature-section active" id="feature1">
+        <h2>Fitur 1: Analisis Bentuk Tubuh & Warna</h2>
+
+        <div class="alert alert-info">
+          Isi data ukuran tubuh Anda. Hasil akan keluar dalam format terstruktur.
+        </div>
+
+        <div class="grid-2">
+          <div class="input-group">
+            <label>Tinggi (cm)</label>
+            <input type="number" id="height" placeholder="Contoh: 165" />
+          </div>
+          <div class="input-group">
+            <label>Berat (kg)</label>
+            <input type="number" id="weight" placeholder="Contoh: 60" />
+          </div>
+        </div>
+
+        <div class="grid-2">
+          <div class="input-group">
+            <label>Lingkar Bahu (cm)</label>
+            <input type="number" id="shoulder" placeholder="Contoh: 95" />
+          </div>
+          <div class="input-group">
+            <label>Lingkar Pinggang (cm)</label>
+            <input type="number" id="waist" placeholder="Contoh: 75" />
+          </div>
+        </div>
+
+        <div class="grid-2">
+          <div class="input-group">
+            <label>Lingkar Pinggul (cm)</label>
+            <input type="number" id="hip" placeholder="Contoh: 95" />
+          </div>
+          <div class="input-group">
+            <label>Warna Kulit</label>
+            <select id="skinTone">
+              <option value="">Pilih...</option>
+              <option value="very light">Very Light</option>
+              <option value="light">Light</option>
+              <option value="medium">Medium</option>
+              <option value="tan">Tan</option>
+              <option value="dark">Dark</option>
+            </select>
+          </div>
+        </div>
+
+        <div class="input-group">
+          <label>Undertone</label>
+          <select id="undertone">
+            <option value="">Pilih...</option>
+            <option value="cool">Cool (pink)</option>
+            <option value="warm">Warm (yellow)</option>
+            <option value="neutral">Neutral</option>
+          </select>
+        </div>
+
+        <button class="btn" onclick="analyzeBodyShape()">Analisis Sekarang</button>
+
+        <div class="loading" id="loading1">
+          <div class="spinner"></div>
+          <p>Sedang menganalisis data...</p>
+        </div>
+
+        <div id="result1"></div>
+      </div>
+
+      <!-- FEATURE 2 -->
+      <div class="feature-section" id="feature2">
+        <h2>Fitur 2: Mix & Match Generator</h2>
+
+        <div class="alert alert-info">
+          Setelah Fitur 1 selesai, pilih acara dan style untuk menghasilkan 3 outfit.
+        </div>
+
+        <div class="grid-2">
+          <div class="input-group">
+            <label>Acara</label>
+            <select id="occasion">
+              <option value="">Pilih...</option>
+              <option value="work">Kerja / Kantor</option>
+              <option value="casual">Santai / Hangout</option>
+              <option value="formal">Formal / Acara Resmi</option>
+              <option value="party">Pesta</option>
+              <option value="wedding">Kondangan</option>
+              <option value="campus">Kampus</option>
+            </select>
+          </div>
+
+          <div class="input-group">
+            <label>Gaya</label>
+            <select id="style">
+              <option value="">Pilih...</option>
+              <option value="minimalist">Minimalis</option>
+              <option value="streetwear">Streetwear</option>
+              <option value="smart casual">Smart Casual</option>
+              <option value="feminine">Feminine</option>
+              <option value="classic">Klasik</option>
+              <option value="edgy">Edgy</option>
+            </select>
+          </div>
+        </div>
+
+        <div class="input-group">
+          <label>Preferensi Warna (Opsional)</label>
+          <input type="text" id="colorPreference" placeholder="Contoh: biru, hitam, putih" />
+        </div>
+
+        <button class="btn" onclick="generateOutfit()">Generate Outfit</button>
+
+        <div class="loading" id="loading2">
+          <div class="spinner"></div>
+          <p>Membuat kombinasi outfit terbaik...</p>
+        </div>
+
+        <div id="result2"></div>
+      </div>
+
+      <!-- FEATURE 3 -->
+      <div class="feature-section" id="feature3">
+        <h2>Fitur 3: Virtual Try-On (Deskriptif)</h2>
+
+        <div class="alert alert-info">
+          Fitur ini tidak “mengedit foto” (karena butuh model image-editing khusus).
+          Yang dihasilkan adalah deskripsi bagaimana outfit akan terlihat pada Anda berdasarkan pilihan outfit.
+        </div>
+
+        <div class="input-group">
+          <label>Upload Foto Anda</label>
+          <div class="file-upload" onclick="document.getElementById('tryonPhoto').click()">
+            <input type="file" id="tryonPhoto" accept="image/*" onchange="previewImage(this, 'tryonPreview')" />
+            <p>Klik untuk upload foto</p>
+            <small>Foto menghadap kamera untuk hasil terbaik</small>
+          </div>
+          <img id="tryonPreview" class="preview-image" alt="preview"/>
+        </div>
+
+        <div class="input-group">
+          <label>Pilih Outfit dari Rekomendasi</label>
+          <select id="outfitChoice">
+            <option value="">Pilih outfit...</option>
+          </select>
+        </div>
+
+        <button class="btn" onclick="virtualTryOn()">Coba Virtual</button>
+
+        <div class="loading" id="loading3">
+          <div class="spinner"></div>
+          <p>Memproses virtual try-on...</p>
+        </div>
+
+        <div id="result3"></div>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    // =============================
+    // STATE
+    // =============================
+    let apiKey = 'AIzaSyA1Aj6rpqxVQt-6OCOPsBXPFUce6C2OfKs';
+    let analysisData = null;
+    let outfitRecommendations = [];
+
+//     import { GoogleGenerativeAI } from "@google/generative-ai";
+
+//   const genAI = new GoogleGenerativeAI(apiKey);
+
+//   async function callGeminiText(prompt) {
+//   const response = await fetch(
+//     "https://generativelanguage.googleapis.com/v1beta/models/text-bison-001:generateText?key=" + apiKey,
+//     {
+//       method: "POST",
+//       headers: { "Content-Type": "application/json" },
+//       body: JSON.stringify({
+//         prompt: { text: prompt }
+//       })
+//     }
+//   );
+
+//   const data = await response.json();
+//   return data.candidates?.[0]?.output || "";
+// }
+
+//   const text = await callGeminiText("Halo Gemini");
+//   console.log(text);
+
+    // =============================
+    // INIT
+    // =============================
+    window.addEventListener('load', () => {
+      const saved = localStorage.getItem('gemini_api_key');
+      if (saved) {
+        apiKey = saved.trim();
+        document.getElementById('apiKeyInput').value = apiKey;
+        setApiStatus(true, 'API Key tersimpan.');
+      } else {
+        setApiStatus(false, 'API Key belum diatur.');
+      }
+    });
+
+    function setApiStatus(ok, msg) {
+      const el = document.getElementById('apiStatus');
+      el.className = 'alert ' + (ok ? 'alert-success' : 'alert-warning');
+      el.textContent = ok ? '✅ ' + msg : '⚠️ ' + msg;
+    }
+
+    function saveApiKey() {
+      const input = document.getElementById('apiKeyInput');
+      apiKey = (input.value || '').trim();
+
+      if (!apiKey || !apiKey.startsWith('AIza')) {
+        setApiStatus(false, 'API Key tidak valid. Pastikan diawali "AIza".');
+        return;
+      }
+
+      localStorage.setItem('gemini_api_key', apiKey);
+      setApiStatus(true, 'API Key tersimpan.');
+    }
+
+    function clearApiKey() {
+      apiKey = '';
+      localStorage.removeItem('gemini_api_key');
+      document.getElementById('apiKeyInput').value = '';
+      setApiStatus(false, 'API Key dihapus.');
+    }
+
+    // =============================
+    // UI HELPERS
+    // =============================
+    function switchTab(index) {
+      const tabs = document.querySelectorAll('.tab');
+      const sections = document.querySelectorAll('.feature-section');
+
+      tabs.forEach((t, i) => t.classList.toggle('active', i === index));
+      sections.forEach((s, i) => s.classList.toggle('active', i === index));
+    }
+
+    function previewImage(input, previewId) {
+      const preview = document.getElementById(previewId);
+      if (!input.files || !input.files[0]) return;
+
+      const reader = new FileReader();
+      reader.onload = (e) => {
+        preview.src = e.target.result;
+        preview.style.display = 'block';
+      };
+      reader.readAsDataURL(input.files[0]);
+    }
+
+    function ensureApiKeyOrAlert() {
+      if (!apiKey) {
+        alert('API Key belum diatur. Silakan simpan API Key terlebih dahulu.');
+        return false;
+      }
+      return true;
+    }
+
+    // =============================
+    // GEMINI CALL (TEXT)
+    // =============================
+    async function callGeminiText(prompt) {
+      if (!apiKey) throw new Error('API Key belum diatur.');
+
+      // Gunakan model yang umum tersedia untuk generateContent
+      const MODEL = 'gemini-1.5-flash';
+
+      const response = await fetch(
+        `https://generativelanguage.googleapis.com/v1/models/${MODEL}:generateContent?key=${apiKey}`,
+        {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({
+            contents: [{ parts: [{ text: prompt }] }],
+            generationConfig: {
+              temperature: 0.8,
+              topP: 0.95,
+              maxOutputTokens: 2048
+            }
+          })
+        }
+      );
+
+      if (!response.ok) {
+        const err = await response.json().catch(() => ({}));
+        const msg = err?.error?.message || `API Error (${response.status})`;
+        throw new Error(msg);
+      }
+
+      const data = await response.json();
+      return data?.candidates?.[0]?.content?.parts?.[0]?.text || '';
+    }
+
+    // =============================
+    // FEATURE 1: ANALYZE
+    // =============================
+    async function analyzeBodyShape() {
+      if (!ensureApiKeyOrAlert()) return;
+
+      const height = document.getElementById('height').value;
+      const weight = document.getElementById('weight').value;
+      const shoulder = document.getElementById('shoulder').value;
+      const waist = document.getElementById('waist').value;
+      const hip = document.getElementById('hip').value;
+      const skinTone = document.getElementById('skinTone').value;
+      const undertone = document.getElementById('undertone').value;
+
+      if (!height || !weight || !shoulder || !waist || !hip || !skinTone || !undertone) {
+        alert('Mohon lengkapi semua data.');
+        return;
+      }
+
+      const loading = document.getElementById('loading1');
+      const resultDiv = document.getElementById('result1');
+
+      loading.classList.add('active');
+      resultDiv.innerHTML = '';
+
+      const prompt = `Kamu adalah fashion expert dan body shape analyst profesional.
+Analisis data berikut dan berikan output dalam format JSON yang VALID.
+
+Data:
+- Tinggi: ${height} cm
+- Berat: ${weight} kg
+- Lingkar Bahu: ${shoulder} cm
+- Lingkar Pinggang: ${waist} cm
+- Lingkar Pinggul: ${hip} cm
+- Warna Kulit: ${skinTone}
+- Undertone: ${undertone}
+
+Output HARUS berupa JSON saja (tanpa markdown, tanpa penjelasan di luar JSON):
+{
+  "bodyShape": "rectangle",
+  "bodyShapeDescription": "Deskripsi bentuk tubuh",
+  "strengths": ["Kelebihan 1", "Kelebihan 2", "Kelebihan 3"],
+  "recommendations": {
+    "dos": ["Do 1", "Do 2", "Do 3"],
+    "donts": ["Dont 1", "Dont 2", "Dont 3"]
+  },
+  "colorAnalysis": {
+    "bestColors": ["Warna 1", "Warna 2", "Warna 3", "Warna 4", "Warna 5"],
+    "avoidColors": ["Warna 1", "Warna 2", "Warna 3"],
+    "reasoning": "Alasan"
+  },
+  "clothingStyles": ["Style 1", "Style 2", "Style 3"],
+  "fabricRecommendations": ["Bahan 1", "Bahan 2", "Bahan 3"]
+}`;
+
+      try {
+        const text = await callGeminiText(prompt);
+        let jsonText = (text || '').trim().replace(/```json/gi, '').replace(/```/g, '').trim();
+        analysisData = JSON.parse(jsonText);
+
+        resultDiv.innerHTML = `
+          <div class="result-box">
+            <h3>Hasil Analisis</h3>
+
+            <div class="result-item">
+              <h4>Bentuk Tubuh: ${(analysisData.bodyShape || '').toUpperCase()}</h4>
+              <p>${analysisData.bodyShapeDescription || '-'}</p>
+            </div>
+
+            <div class="result-item">
+              <h4>Kelebihan</h4>
+              <ul>${(analysisData.strengths || []).map(s => `<li>${escapeHtml(s)}</li>`).join('')}</ul>
+            </div>
+
+            <div class="result-item">
+              <h4>Yang Disarankan</h4>
+              <ul>${(analysisData?.recommendations?.dos || []).map(s => `<li>${escapeHtml(s)}</li>`).join('')}</ul>
+            </div>
+
+            <div class="result-item">
+              <h4>Yang Dihindari</h4>
+              <ul>${(analysisData?.recommendations?.donts || []).map(s => `<li>${escapeHtml(s)}</li>`).join('')}</ul>
+            </div>
+
+            <div class="result-item">
+              <h4>Analisis Warna</h4>
+              <p><strong>Warna Terbaik:</strong> ${(analysisData?.colorAnalysis?.bestColors || []).map(escapeHtml).join(', ')}</p>
+              <p><strong>Warna Dihindari:</strong> ${(analysisData?.colorAnalysis?.avoidColors || []).map(escapeHtml).join(', ')}</p>
+              <p><strong>Alasan:</strong> ${escapeHtml(analysisData?.colorAnalysis?.reasoning || '-')}</p>
+            </div>
+
+            <div class="result-item">
+              <h4>Gaya Cocok</h4>
+              <p>${(analysisData.clothingStyles || []).map(escapeHtml).join(', ')}</p>
+            </div>
+
+            <div class="result-item">
+              <h4>Rekomendasi Bahan</h4>
+              <p>${(analysisData.fabricRecommendations || []).map(escapeHtml).join(', ')}</p>
+            </div>
+
+            <div class="alert alert-success">
+              Analisis selesai. Silakan lanjut ke tab Mix & Match.
+            </div>
+          </div>
+        `;
+      } catch (err) {
+        resultDiv.innerHTML = `<div class="alert alert-danger">❌ Error: ${escapeHtml(err.message)}</div>`;
+      } finally {
+        loading.classList.remove('active');
+      }
+    }
+
+    // =============================
+    // FEATURE 2: OUTFIT
+    // =============================
+    async function generateOutfit() {
+      if (!ensureApiKeyOrAlert()) return;
+
+      if (!analysisData) {
+        alert('Silakan jalankan Fitur 1 (Analisis) terlebih dahulu.');
+        switchTab(0);
+        return;
+      }
+
+      const occasion = document.getElementById('occasion').value;
+      const style = document.getElementById('style').value;
+      const colorPref = document.getElementById('colorPreference').value;
+
+      if (!occasion || !style) {
+        alert('Mohon pilih acara dan gaya.');
+        return;
+      }
+
+      const loading = document.getElementById('loading2');
+      const resultDiv = document.getElementById('result2');
+
+      loading.classList.add('active');
+      resultDiv.innerHTML = '';
+
+      const prompt = `Kamu adalah fashion stylist expert profesional.
+Buatkan 3 kombinasi outfit lengkap berdasarkan data berikut:
+
+Bentuk Tubuh: ${analysisData.bodyShape}
+Warna Terbaik: ${(analysisData?.colorAnalysis?.bestColors || []).join(', ')}
+Acara: ${occasion}
+Gaya Pribadi: ${style}
+${colorPref ? `Preferensi Warna: ${colorPref}` : ''}
+
+Output HARUS berupa JSON saja (tanpa markdown):
+{
+  "outfits": [
+    {
+      "name": "Nama Outfit 1",
+      "description": "Deskripsi singkat outfit",
+      "top": "Atasan",
+      "bottom": "Bawahan",
+      "shoes": "Sepatu",
+      "accessories": ["Aksesoris 1", "Aksesoris 2"],
+      "colors": ["Warna 1", "Warna 2"],
+      "occasion": "Kapan cocok dipakai",
+      "tips": "Tips styling"
+    },
+    {
+      "name": "Nama Outfit 2",
+      "description": "Deskripsi singkat outfit",
+      "top": "Atasan",
+      "bottom": "Bawahan",
+      "shoes": "Sepatu",
+      "accessories": ["Aksesoris 1", "Aksesoris 2"],
+      "colors": ["Warna 1", "Warna 2"],
+      "occasion": "Kapan cocok dipakai",
+      "tips": "Tips styling"
+    },
+    {
+      "name": "Nama Outfit 3",
+      "description": "Deskripsi singkat outfit",
+      "top": "Atasan",
+      "bottom": "Bawahan",
+      "shoes": "Sepatu",
+      "accessories": ["Aksesoris 1", "Aksesoris 2"],
+      "colors": ["Warna 1", "Warna 2"],
+      "occasion": "Kapan cocok dipakai",
+      "tips": "Tips styling"
+    }
+  ]
+}`;
+
+      try {
+        const text = await callGeminiText(prompt);
+        let jsonText = (text || '').trim().replace(/```json/gi, '').replace(/```/g, '').trim();
+
+        const data = JSON.parse(jsonText);
+        outfitRecommendations = data.outfits || [];
+
+        // dropdown untuk Virtual Try-On
+        const select = document.getElementById('outfitChoice');
+        select.innerHTML = '<option value="">Pilih outfit...</option>' +
+          outfitRecommendations.map((o, i) => `<option value="${i}">${escapeHtml(o.name)}</option>`).join('');
+
+        resultDiv.innerHTML = `
+          <div class="result-box">
+            <h3>Rekomendasi Outfit</h3>
+            ${outfitRecommendations.map(o => `
+              <div class="outfit-card">
+                <h4>${escapeHtml(o.name)}</h4>
+                <p><em>${escapeHtml(o.description || '')}</em></p>
+                <p><strong>Atasan:</strong> ${escapeHtml(o.top || '')}</p>
+                <p><strong>Bawahan:</strong> ${escapeHtml(o.bottom || '')}</p>
+                <p><strong>Sepatu:</strong> ${escapeHtml(o.shoes || '')}</p>
+                <p><strong>Aksesoris:</strong> ${(o.accessories || []).map(escapeHtml).join(', ')}</p>
+                <p><strong>Warna:</strong> ${(o.colors || []).map(escapeHtml).join(', ')}</p>
+                <p><strong>Cocok untuk:</strong> ${escapeHtml(o.occasion || '')}</p>
+                <p><strong>Tips:</strong> ${escapeHtml(o.tips || '')}</p>
+              </div>
+            `).join('')}
+            <div class="alert alert-success">Outfit dibuat. Silakan lanjut ke Virtual Try-On.</div>
+          </div>
+        `;
+      } catch (err) {
+        resultDiv.innerHTML = `<div class="alert alert-danger">❌ Error: ${escapeHtml(err.message)}</div>`;
+      } finally {
+        loading.classList.remove('active');
+      }
+    }
+
+    // =============================
+    // FEATURE 3: VIRTUAL TRY-ON (DESCRIPTIVE)
+    // =============================
+    async function virtualTryOn() {
+      if (!ensureApiKeyOrAlert()) return;
+
+      const photo = document.getElementById('tryonPhoto').files[0];
+      const outfitIndex = document.getElementById('outfitChoice').value;
+
+      if (!photo) {
+        alert('Mohon upload foto Anda.');
+        return;
+      }
+      if (outfitIndex === '') {
+        alert('Mohon pilih outfit dari rekomendasi.');
+        return;
+      }
+      if (!outfitRecommendations || outfitRecommendations.length === 0) {
+        alert('Silakan generate outfit dulu (Fitur 2).');
+        switchTab(1);
+        return;
+      }
+
+      const loading = document.getElementById('loading3');
+      const resultDiv = document.getElementById('result3');
+      loading.classList.add('active');
+      resultDiv.innerHTML = '';
+
+      try {
+        const selected = outfitRecommendations[Number(outfitIndex)];
+
+        const prompt = `Kamu adalah fashion visualization expert.
+Buatkan deskripsi detail bagaimana outfit berikut akan terlihat pada seseorang (virtual try-on deskriptif).
+
+Outfit: ${selected.name}
+- Atasan: ${selected.top}
+- Bawahan: ${selected.bottom}
+- Sepatu: ${selected.shoes}
+- Aksesoris: ${(selected.accessories || []).join(', ')}
+- Warna: ${(selected.colors || []).join(', ')}
+
+Output dalam format JSON saja:
+{
+  "visualization": "Deskripsi tampilan keseluruhan",
+  "proportions": "Bagaimana proporsi dan fit terlihat",
+  "colorHarmony": "Harmoni warna",
+  "stylingTips": ["Tip 1","Tip 2","Tip 3"],
+  "adjustments": ["Saran 1","Saran 2"]
+}`;
+
+        const text = await callGeminiText(prompt);
+        let jsonText = (text || '').trim().replace(/```json/gi, '').replace(/```/g, '').trim();
+        const v = JSON.parse(jsonText);
+
+        resultDiv.innerHTML = `
+          <div class="result-box">
+            <h3>Hasil Virtual Try-On (Deskripsi)</h3>
+
+            <div class="result-item">
+              <h4>Foto Anda</h4>
+              <img src="${document.getElementById('tryonPreview').src}" class="preview-image" style="display:block;">
+            </div>
+
+            <div class="result-item">
+              <h4>Visualisasi</h4>
+              <p>${escapeHtml(v.visualization || '-')}</p>
+            </div>
+
+            <div class="result-item">
+              <h4>Proporsi & Fit</h4>
+              <p>${escapeHtml(v.proportions || '-')}</p>
+            </div>
+
+            <div class="result-item">
+              <h4>Harmoni Warna</h4>
+              <p>${escapeHtml(v.colorHarmony || '-')}</p>
+            </div>
+
+            <div class="result-item">
+              <h4>Tips Styling</h4>
+              <ul>${(v.stylingTips || []).map(t => `<li>${escapeHtml(t)}</li>`).join('')}</ul>
+            </div>
+
+            <div class="result-item">
+              <h4>Saran Penyesuaian</h4>
+              <ul>${(v.adjustments || []).map(a => `<li>${escapeHtml(a)}</li>`).join('')}</ul>
+            </div>
+
+            <div class="alert alert-success">Selesai. Anda bisa pilih outfit lain dan coba lagi.</div>
+          </div>
+        `;
+      } catch (err) {
+        resultDiv.innerHTML = `<div class="alert alert-danger">❌ Error: ${escapeHtml(err.message)}</div>`;
+      } finally {
+        loading.classList.remove('active');
+      }
+    }
+
+    // =============================
+    // SECURITY HELPERS
+    // =============================
+    function escapeHtml(str) {
+      return String(str ?? '')
+        .replaceAll('&', '&amp;')
+        .replaceAll('<', '&lt;')
+        .replaceAll('>', '&gt;')
+        .replaceAll('"', '&quot;')
+        .replaceAll("'", '&#039;');
+    }
+  </script>
+</body>
+</html>
