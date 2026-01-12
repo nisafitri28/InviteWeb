@@ -1,5 +1,5 @@
 {
-  "name": "inviteweb-pro",
+  "name": "inviteweb",
   "private": true,
   "version": "0.0.0",
   "type": "module",
@@ -20,6 +20,6 @@
     "vite": "^4.4.0"
   },
   "engines": {
-    "node": "16.x"
+    "node": "16.1"
   }
 }
